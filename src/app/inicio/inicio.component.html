@@ -1,0 +1,12 @@
+<div class="panel" #panel>
+    <div class="avatars">
+        <div class="avatar" *ngFor="let avatar of avatars">
+            <img src="{{avatar}}">
+        </div>
+    </div>
+</div>
+<footer>
+    <button (click)="showAvatars()">
+        Comenzar
+    </button>
+</footer>

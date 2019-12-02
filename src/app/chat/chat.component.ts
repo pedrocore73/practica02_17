@@ -11,6 +11,11 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    this.chatService.mensajes
+              .subscribe(data =>{
+                console.log(data);
+              });
+    this.chatService.sendMensaje('Estableciendo conexión')
   }
 
 }

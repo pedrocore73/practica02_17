@@ -21,5 +21,9 @@ export class ChatService {
                           )
   }
 
+  sendMensaje(msj) {
+    this.mensajes.next(msj);
+  }
+
 
 }

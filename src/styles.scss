@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+.panel {
+    width: 100%;
+    position: fixed;
+    top: -400px;
+    left: 0;
+    transition: all 500ms ease-in-out;
+
+    &.open {
+        top: 160px;
+    }
+
+    .avatars {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 60%;
+        margin: 0 auto;
+
+        .avatar {
+            height: 100px;
+            width: 100px;
+            border-radius: 60px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                height: 70px;
+            }
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    height: 120px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        border: none;
+        background-color: tomato;
+        padding: 1em 1.5em;
+        font-size: 1.5em;
+        color: white;
+        border-radius: 0.3em;
+    }
+}

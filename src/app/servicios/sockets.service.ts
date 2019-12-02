@@ -28,7 +28,7 @@ export class SocketsService {
 
     let observer = {
       next: (data) => {
-        // código para los mensajes que emitimos
+        this.socket.emit('mensaje', data)
       }
     }
 
