@@ -1,12 +1,21 @@
 <div class="panel" #panel>
     <div class="avatars">
-        <div class="avatar" *ngFor="let avatar of avatars">
+        <div class="avatar" 
+             *ngFor="let avatar of avatars; let i = index"
+             #avatarRef
+             (click)="setAvatar(i)">
             <img src="{{avatar}}">
         </div>
     </div>
+    <!-- Two-way binding -->
+    <input type="text" placeholder="Nombre" [(ngModel)]="nombre"> 
 </div>
 <footer>
-    <button (click)="showAvatars()">
+    <button *ngIf="!start" (click)="showAvatars()">
         Comenzar
     </button>
+    <button *ngIf="start" (click)="startChat()">
+        Iniciar chat
+    </button>
+    <p>{{mensaje}}</p>
 </footer>

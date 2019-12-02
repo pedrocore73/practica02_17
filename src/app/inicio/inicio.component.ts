@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -17,14 +18,46 @@ export class InicioComponent implements OnInit {
   ]
 
   @ViewChild('panel', {static: false}) panelRef: ElementRef;
+  @ViewChildren('avatarRef') avatarsRef: QueryList<ElementRef>;
+  elementosAvatarsRef = [];
+  avatar: string;
+  nombre: string;
+  start = false;
+  mensaje: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    
+  }
+
+  ngAfterViewInit() {
+    this.avatarsRef.forEach(elem => {
+      this.elementosAvatarsRef.push(elem);
+    })
   }
 
   showAvatars() {
     this.panelRef.nativeElement.classList.add('open');
+    this.start = true;
+  }
+
+  setAvatar(i) {
+    this.elementosAvatarsRef.forEach(elem => {
+      elem.nativeElement.classList.remove('selected');
+    });
+    this.elementosAvatarsRef[i].nativeElement.classList.add('selected');
+    this.avatar = this.avatars[i];
+    localStorage.setItem('avatar', this.avatar);
+  }
+
+  startChat() {
+    if(this.avatar === undefined || this.nombre === undefined) {
+      this.mensaje  = 'Debe seleccionar un avatar y escribir un nombre';
+    } else {
+      localStorage.setItem('nombre', this.nombre);
+      this.router.navigate(['/chat']);
+    }
   }
 
 }
