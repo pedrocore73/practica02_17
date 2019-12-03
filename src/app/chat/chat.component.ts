@@ -10,6 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class ChatComponent implements OnInit {
 
   chatForm: FormGroup;
+  mensajes = [];
 
   constructor(private chatService: ChatService) { }
 
@@ -19,15 +20,18 @@ export class ChatComponent implements OnInit {
     })
     this.chatService.mensajes
               .subscribe(data =>{
-                console.log(data);
+                this.mensajes.push(JSON.parse(data));
               });          
   }
 
   sendTexto() {
     let mensaje = {
+      nombre: localStorage.getItem('nombre'),
+      avatar: localStorage.getItem('avatar'),
       texto: this.chatForm.get('texto').value
     }
     this.chatService.sendMensaje(mensaje);
+    this.chatForm.reset();
   }
 
 }

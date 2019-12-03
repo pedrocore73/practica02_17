@@ -1,3 +1,15 @@
+<div class="top-panel">
+    <div class="mensaje" *ngFor="let mensaje of mensajes">
+        <div class="contenido">
+            <img [src]="mensaje.avatar">
+            <span>
+                <span class="nombre">{{mensaje.nombre}}</span>
+                <br>
+                {{mensaje.texto}}
+            </span>
+        </div>
+    </div>
+</div>
 <div class="bottom-panel">
     <form [formGroup]="chatForm" (ngSubmit)="sendTexto()">
         <input type="text" formControlName="texto">
