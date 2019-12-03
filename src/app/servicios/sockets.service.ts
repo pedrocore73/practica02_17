@@ -28,7 +28,11 @@ export class SocketsService {
 
     let observer = {
       next: (data) => {
-        this.socket.emit('mensaje', data)
+        if(data.nombre) {
+          this.socket.emit('start', JSON.stringify(data));
+        } else {
+          this.socket.emit('mensaje', JSON.stringify(data));
+        }
       }
     }
 

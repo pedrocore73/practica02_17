@@ -1,1 +1,6 @@
-<p>chat works!</p>
+<div class="bottom-panel">
+    <form [formGroup]="chatForm" (ngSubmit)="sendTexto()">
+        <input type="text" formControlName="texto">
+        <button type="submit">+</button>
+    </form>
+</div>

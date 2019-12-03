@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
+import { ChatService } from '../servicios/chat.service';
 
 @Component({
   selector: 'app-inicio',
@@ -25,7 +26,9 @@ export class InicioComponent implements OnInit {
   start = false;
   mensaje: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private chatService: ChatService
+              ) { }
 
   ngOnInit() {
     
@@ -56,6 +59,7 @@ export class InicioComponent implements OnInit {
       this.mensaje  = 'Debe seleccionar un avatar y escribir un nombre';
     } else {
       localStorage.setItem('nombre', this.nombre);
+      this.chatService.sendMensaje({nombre: this.nombre});
       this.router.navigate(['/chat']);
     }
   }
