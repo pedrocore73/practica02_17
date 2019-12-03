@@ -121,6 +121,19 @@ footer {
         }
     }
 
+    .usuarios {
+        position: absolute;
+        top: 2em;
+        left: 2em;
+
+        span {
+            font-size: 0.6em;
+            color: white;
+            display: block;
+            padding: 0.5em;
+        }
+    }
+
 }
 
 .top-panel {
@@ -130,10 +143,15 @@ footer {
     display: flex;
     flex-direction: column;
     padding: 1em 2em;
+    overflow: auto;
 
     .mensaje {
         width: 100%;
         display: flex;
+
+        &.propio {
+            justify-content: flex-end;
+        }
 
         .contenido {
             margin: 1em;

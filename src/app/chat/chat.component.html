@@ -1,5 +1,7 @@
-<div class="top-panel">
-    <div class="mensaje" *ngFor="let mensaje of mensajes">
+<div class="top-panel" #panel>
+    <div class="mensaje" 
+         *ngFor="let mensaje of mensajes"
+         [ngClass]="{'propio': mensaje.nombre === nombre}">
         <div class="contenido">
             <img [src]="mensaje.avatar">
             <span>
@@ -11,6 +13,11 @@
     </div>
 </div>
 <div class="bottom-panel">
+    <div class="usuarios">
+        <span *ngFor="let usuario of usuarios">
+            {{usuario.nombre}}
+        </span>
+    </div>
     <form [formGroup]="chatForm" (ngSubmit)="sendTexto()">
         <input type="text" formControlName="texto">
         <button type="submit">+</button>

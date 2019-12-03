@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../servicios/chat.service';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -11,17 +11,33 @@ export class ChatComponent implements OnInit {
 
   chatForm: FormGroup;
   mensajes = [];
+  nombre: string;
+  @ViewChild('panel', {static: false}) panelRef: ElementRef;
+  usuarios = [];
 
   constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    this.nombre = localStorage.getItem('nombre');
     this.chatForm = new FormGroup({
       texto: new FormControl('')
     })
     this.chatService.mensajes
               .subscribe(data =>{
-                this.mensajes.push(JSON.parse(data));
+                if((JSON.parse(data))[0].id) {
+                  this.usuarios = JSON.parse(data);
+                } else {
+                  this.mensajes.push(JSON.parse(data));
+                }
               });          
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    this.panelRef.nativeElement.scrollTop = this.panelRef.nativeElement.scrollHeight;
   }
 
   sendTexto() {
