@@ -13,13 +13,10 @@
     </div>
 </div>
 <div class="bottom-panel">
-    <div class="usuarios">
-        <span *ngFor="let usuario of usuarios">
-            {{usuario.nombre}}
-        </span>
-    </div>
     <form [formGroup]="chatForm" (ngSubmit)="sendTexto()">
         <input type="text" formControlName="texto">
         <button type="submit">+</button>
     </form>
+    <p *ngIf="nombre !== usuarioConnect && showConnectUser">{{usuarioConnect}} se ha conectado</p>
+    <p *ngIf="nombre !== usuarioDisconnect && showDisconnectUser">{{usuarioDisconnect}} se ha desconectado</p>
 </div>

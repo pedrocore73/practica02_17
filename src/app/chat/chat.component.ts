@@ -13,7 +13,10 @@ export class ChatComponent implements OnInit {
   mensajes = [];
   nombre: string;
   @ViewChild('panel', {static: false}) panelRef: ElementRef;
-  usuarios = [];
+  usuarioConnect: string;
+  showConnectUser = false;
+  usuarioDisconnect: string;
+  showDisconnectUser = false;
 
   constructor(private chatService: ChatService) { }
 
@@ -24,10 +27,17 @@ export class ChatComponent implements OnInit {
     })
     this.chatService.mensajes
               .subscribe(data =>{
-                if((JSON.parse(data))[0].id) {
-                  this.usuarios = JSON.parse(data);
+                let dataJs = JSON.parse(data);
+                if(dataJs.usuarioConnect) {
+                  this.showConnectUser = true;
+                  this.usuarioConnect = dataJs.usuarioConnect;
+                  setTimeout(()=>{this.showConnectUser = false}, 3000);
+                } else if (dataJs.usuarioDisconnect) {
+                  this.showDisconnectUser = true;
+                  this.usuarioDisconnect = dataJs.usuarioDisconnect;
+                  setTimeout(()=>{this.showDisconnectUser = false}, 3000);
                 } else {
-                  this.mensajes.push(JSON.parse(data));
+                  this.mensajes.push(dataJs);
                 }
               });          
   }
